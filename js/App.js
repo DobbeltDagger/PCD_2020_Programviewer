@@ -2,6 +2,7 @@ function App() {
   
   this.currImg = '';        // Url to the current background image
   this.schedule = [];       // info about what to show when. The data ...
+  this.testTime = { hours: 9, mins: 30 };
   
 }
 
@@ -23,7 +24,7 @@ App.prototype = {
     let self=this;
     setInterval( e => {
       self.checkTime();
-    }, 2000);
+    }, 50);
 
   },
 
@@ -35,27 +36,36 @@ App.prototype = {
     const now = this.getNow();
     console.log("now:", now);
 
+    // put time in interface
+    let showHours = ''; let showMins = ''; 
+    (now.hours < 10) ? showHours = '0'+now.hours : showHours = now.hours;
+    (now.mins < 10) ? showMins = "0"+now.mins : showMins = now.mins;
+    document.getElementById('txtWrapper').innerHTML = showHours + ":" + showMins;
+
+
     // go through time here - backwards
     for(let i = this.schedule.length-1; i >= 0; i--) {
-      console.log("sched[i]", this.schedule[i]);
+      // console.log("sched[i]", this.schedule[i]);
 
       // shorten the time vars
       const scHours = this.schedule[i].hours;
       const scMins = this.schedule[i].mins;
 
       // compare now to schedule times
-      if (now.hours >= scHours && now.mins >= scMins) {
-        this.currImg = this.schedule[i].imgUrl;
+      if (now.hours >= scHours) {
+
+        // checking minutes
+        if (now.mins >= scMins) {
+          this.currImg = this.schedule[i].imgUrl;
+          this.renderImage();
+          return;
+        }
+        
       }
 
     }
 
-    // put time in interface
-    let showHours = ''; let showMins = ''; 
-    (now.hours < 10) ? showHours = '0'+now.hours : showHours = now.hours;
-    (now.mins < 10) ? showMins = "0"+now.mins : showMins = now.mins;
 
-    document.getElementById('txtWrapper').innerHTML = showHours + ":" + showMins;
 
   },
 
@@ -63,19 +73,38 @@ App.prototype = {
   ////////////////////////////////
   // this function should produce a timer, that goes through the program very quickly.
   // ..for testing purposes
+  /*
   testTimer: function() {
 
 
   },
+  */
 
 
   ////////////////////////////////
   // this function returns current time as object { hours, mins }
   getNow: function() {
+
+    // FAKE time moving fast forward
+    console.log("testTime:", this.testTime);
+
+    // add to min
+    if (this.testTime.mins >= 59) {
+      this.testTime.mins = 0;
+      this.testTime.hours++;
+    } else {
+      this.testTime.mins++;
+    }
+
+    return this.testTime;
+
+    /*
+    // REAL TIME BELOW
     const date = new Date();
     const hours = date.getHours();
     const mins = date.getMinutes();
     return { hours: hours, mins: mins }
+    */
   },
 
 
@@ -83,8 +112,8 @@ App.prototype = {
   // put the backgournd img on screen
   renderImage: function(imgPath) {
 
-    let test = 'url(images/Program.jpg)';
-    // test = 'url(images/' + imgPath + ')';
+    // let test = 'url(images/Program.jpg)';
+    let test = 'url(images/' + this.currImg + ')'; // imgPath + ')';
 
     // find elm
     let elm = document.getElementById('imgWrapper').style.backgroundImage = test;
@@ -96,12 +125,19 @@ App.prototype = {
   initSchedule: function() {
 
     this.schedule = [
+      // Program as default
+      {
+        "hours": 9,
+        "mins": 0,
+        "imgUrl": "Program.jpg",
+        "desc": "Processing Community Day @Aarhus 2020"
+      },
       // Workshop #1 - Frederik og Rolf
       {
         "hours": 10,
         "mins": 15,
         "imgUrl": "slides2.jpg",
-        "desc": "Workshop #1: Live Coding with Sonic Pi  Frederik la Cour & Rolf Holm"
+        "desc": "Workshop #1: Live Coding with Sonic Pi, Frederik la Cour & Rolf Holm"
       },
       // BREAK
       {
@@ -122,14 +158,14 @@ App.prototype = {
         "hours": 11,
         "mins": 55,
         "imgUrl": "slides5.jpg",
-        "desc": "Open and Close — Creating Other Archives  Gabriel Pereira"
+        "desc": "Open and Close — Creating Other Archives, Gabriel Pereira"
       },
       // Juicy Blockchain - Anna
       {
         "hours": 12,
         "mins": 15,
         "imgUrl": "slides6.jpg",
-        "desc": "A Juicy Blockchain Story about Governance  Anna Brynskov"
+        "desc": "A Juicy Blockchain Story about Governance, Anna Brynskov"
       },
       // LUNCH
       {
@@ -143,7 +179,7 @@ App.prototype = {
         "hours": 13,
         "mins": 00,
         "imgUrl": "slides8.jpg",
-        "desc": "Sonic Surveys and Disruptions of Denmark  Alex Mørch"
+        "desc": "Sonic Surveys and Disruptions of Denmark, Alex Mørch"
       },
       // Utopia + - Mogens
       {
@@ -157,7 +193,7 @@ App.prototype = {
         "hours": 13,
         "mins": 40,
         "imgUrl": "slides10.jpg",
-        "desc": "Fermenting Data: Sampling and Other Experiments with Microbes, Plants, People and Culture Machines  Magda Tyżlik-Carver"
+        "desc": "Fermenting Data: Sampling and Other Experiments with Microbes, Plants, People and Culture Machines, Magda Tyżlik-Carver"
       },
       // BREAK
       {
@@ -171,17 +207,15 @@ App.prototype = {
         "hours": 14,
         "mins": 15,
         "imgUrl": "slides12.jpg",
-        "desc": "Workshop #2: Machine Learning with P5.js  Lasse Korsgaard & Niels Konrad"
+        "desc": "Workshop #2: Machine Learning with P5.js, Lasse Korsgaard & Niels Konrad"
       },
       // Social time!
-      /*
       {
-        "hours": 11,
+        "hours": 15,
         "mins": 30,
-        "imgUrl": "",
-        "desc": "BREAK"
+        "imgUrl": "Program.jpg",
+        "desc": "PCD 2020 is over"
       }, 
-      */                                                                
     ];
 
     return;

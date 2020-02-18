@@ -66,7 +66,7 @@ html {
 }
 
 body {
-  background: #FFF; /* #FCFCFC; */
+  background: rebeccapurple; /* pink; /* #FCFCFC; */
   color: #444;
   font-family: 'Rubik', sans-serif;
   font-size: 18px; /* 20px; /* 18px; /* 17px; */
@@ -106,6 +106,7 @@ body {
   color: rgba(255,255,255,0.96);
   font-size: 3em;
 }
+
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* TYPE STUFF */
