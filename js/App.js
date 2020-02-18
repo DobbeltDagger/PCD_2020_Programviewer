@@ -96,7 +96,7 @@ App.prototype = {
     console.log("toggleShowProgramFlag was run");
     this.showProgramFlag = !this.showProgramFlag;
     if (this.showProgramFlag === true) {
-      this.renderImage('Program.jpg'); // show the program
+      this.renderImage('slides.jpg'); // show the program
     } else {
       this.renderImage(this.currImg); // show the current program item image
     }
@@ -107,6 +107,9 @@ App.prototype = {
   //////////////////////////////////
   // put the time in interface
   updateClockInterface: function(time) {
+    if (time.hours >= 24) {
+      return
+    }
     // put time in interface
     let showHours = ''; let showMins = ''; 
     (time.hours < 10) ? showHours = '0'+time.hours : showHours = time.hours;
@@ -123,7 +126,7 @@ App.prototype = {
       // Program as default
       {
         "time": 900,
-        "imgUrl": "Program.jpg",
+        "imgUrl": "slides.jpg",
         "desc": "Processing Community Day @Aarhus 2020"
       },
       // Workshop #1 - Frederik og Rolf
@@ -195,7 +198,7 @@ App.prototype = {
       // Social time!
       {
         "time": 1530,
-        "imgUrl": "Program.jpg",
+        "imgUrl": "slides.jpg",
         "desc": "PCD 2020 is over"
       }, 
     ];
