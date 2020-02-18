@@ -1,0 +1,20 @@
+{
+  "name": "PCD_2020_ProgramViewer",
+  "version": "1.0.0",
+  "description": "Tiny app for showing program @PCD2020",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server --port=3000 --entry-file=index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DobbeltDagger/PCD_2020_Programviewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DobbeltDagger/PCD_2020_Programviewer/issues"
+  },
+  "homepage": "https://github.com/DobbeltDagger/PCD_2020_Programviewer#readme"
+}
