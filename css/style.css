@@ -74,7 +74,6 @@ body {
   margin: 0px;
   padding: 0em;
   height: 100%;
-  /* -webkit-font-smoothing: antialiased; */ /* NEJ; det har jeg kun på særligt udvalgte */
 }
 
 
@@ -84,7 +83,6 @@ body {
   overflow-x: hidden;
   height: 100%;
   position: relative;
-  background: pink;
 }
 
 
@@ -101,11 +99,12 @@ body {
 
 #txtWrapper {
   position: absolute;
-  left: 0px;
+  right: 0px;
   bottom: 0px;
   z-index: 10;
-  padding: 1em;
-  color: white;
+  padding: 0.65em 0.5em;
+  color: rgba(255,255,255,0.96);
+  font-size: 3em;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
