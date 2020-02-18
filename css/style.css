@@ -76,18 +76,36 @@ body {
   height: 100%;
   /* -webkit-font-smoothing: antialiased; */ /* NEJ; det har jeg kun på særligt udvalgte */
 }
-/* extra div that needs height */
-.dialog-off-canvas-main-canvas {
-  display: block;
-  height: 100%;
-}
+
 
 #pageWrapper {
   padding: 0px; /* 1em; */
   width: auto;
   overflow-x: hidden;
-  min-height: 100%;
+  height: 100%;
   position: relative;
+  background: pink;
+}
+
+
+#imgWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#txtWrapper {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  z-index: 10;
+  padding: 1em;
+  color: white;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
